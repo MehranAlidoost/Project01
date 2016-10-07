@@ -21,6 +21,10 @@
         </activity>
         <activity android:name=".AboutActivity">
         </activity>
+        <activity android:name=".PatientStatusActivity">
+        </activity>
+        <activity android:name=".MainSettingActivity">
+        </activity>
     </application>
 
 </manifest>

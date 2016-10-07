@@ -63,6 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+	/**
+     * initialize
+     */
     private void init() {
 
         userNameEditText = (EditText) findViewById(R.id.loginActivityUserNameEditText);
