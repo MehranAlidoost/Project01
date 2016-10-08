@@ -14,5 +14,10 @@
     <string name="ipAndPortSaved">آی پی و پورت ذخیره شد</string>
     <string name="patiensStaus">وضعیت بیماران</string>
     <string name="menu_exit">خروج</string>
+    <string name="en_about">About</string>
+    <string name="en_login">Login</string>
+    <string name="en_setting">Setting</string>
+    <string name="en_patient">Patient</string>
+    <string name="en_status">Status</string>
 
 </resources>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,8 @@ public class SettingActivity extends AppCompatActivity
 	{
 		super.onCreate (savedInstanceState);
 		setContentView (R.layout.activity_setting);
+		getSupportActionBar ().setDisplayHomeAsUpEnabled (true);
+		getSupportActionBar ().setTitle (R.string.en_setting);
 
 		init ();
 
@@ -64,7 +67,7 @@ public class SettingActivity extends AppCompatActivity
 
 
 	}
-
+	
 	/**
 	 * initialize
 	 */
@@ -76,6 +79,13 @@ public class SettingActivity extends AppCompatActivity
 		saveButton = (Button) findViewById (R.id.settingActivitySaveButton);
 		backButton = (Button) findViewById (R.id.settingActivityBackButton);
 
+	}
+
+	@Override
+	public boolean onOptionsItemSelected (MenuItem item)
+	{
+		this.finish ();
+		return false;
 	}
 
 }
