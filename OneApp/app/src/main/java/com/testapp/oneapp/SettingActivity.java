@@ -10,61 +10,115 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SettingActivity extends AppCompatActivity {
+/**
+ * Setting Activity
+ */
+public class SettingActivity extends AppCompatActivity
+{
 
-    EditText ipEditText, portEditText;
-    Button saveButton, backButton;
-    String ip, port;
-    Context context = SettingActivity.this;
+// <editor-fold defaultstate="" desc="Variables">
+	EditText ipEditText;
+	EditText portEditText;
+	Button   saveButton;
+	Button   backButton;
+	String   ip;
+	String   port;
 
-    SharedPreferences prefs = null;
+	SharedPreferences prefs;
+// </editor-fold>
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+// <editor-fold defaultstate="collapsed" desc="Methods">
+	@Override
+	protected void onCreate (final Bundle savedInstanceState)
+	{
+		super.onCreate (savedInstanceState);
+		setContentView (R.layout.activity_setting);
 
-        init();
+		// Init
+		init ();
+	}
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        ipEditText.setText(prefs.getString("ip", ""));
-        portEditText.setText(prefs.getString("port", ""));
+	/**
+	 * Initialize
+	 */
+	private void init ()
+	{
+		findControls ();
+		bindEevents ();
+		loadData ();
+	}
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ipEditText.getText().toString().equals("") || portEditText.getText().toString().equals("")) {
-                    Toast.makeText(SettingActivity.this, R.string.fillAllFields, Toast.LENGTH_SHORT).show();
-                } else {
-//                    prefs = getSharedPreferences("h", MODE_PRIVATE);
-                    prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("ip", ipEditText.getText().toString());
-                    editor.putString("port", portEditText.getText().toString());
-                    editor.apply();
-                    Toast.makeText(SettingActivity.this, R.string.ipAndPortSaved, Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            }
-        });
+	/**
+	 * Bind Events
+	 */
+	private void bindEevents ()
+	{
+		if (null != saveButton) saveButton.setOnClickListener (new View.OnClickListener ()
+		{
+			@Override
+			public void onClick (View view)
+			{
+				if (ipEditText.getText ().toString ().equals ("") || portEditText.getText ().toString ().equals (""))
+					Toast.makeText (SettingActivity.this, R.string.fillAllFields, Toast.LENGTH_SHORT).show ();
+				else
+				{
+					if (prefs != null)
+					{
+						SharedPreferences.Editor editor = prefs.edit ();
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+						// Save Setting
+						editor.putString ("ip", ipEditText.getText ().toString ());
+						editor.putString ("port", portEditText.getText ().toString ());
+						editor.apply ();
 
+						// Show Message
+						Toast.makeText (SettingActivity.this, R.string.ipAndPortSaved, Toast.LENGTH_SHORT).show ();
 
-    }
+						// Finish
+						finish ();
+					}
+					else
+						// Show Message
+						Toast.makeText (SettingActivity.this, R.string.ipAndPortNotSaved, Toast.LENGTH_SHORT).show ();
+				}
+			}
+		});
 
-    private void init() {
+		if (null != backButton) backButton.setOnClickListener (new View.OnClickListener ()
+		{
+			@Override
+			public void onClick (View view)
+			{
+				finish ();
+			}
+		});
+	}
 
-        ipEditText = (EditText) findViewById(R.id.settingActivityServerIPEditText);
-        portEditText = (EditText) findViewById(R.id.settingActivityServerPortEditText);
-        saveButton = (Button) findViewById(R.id.settingActivitySaveButton);
-        backButton = (Button) findViewById(R.id.settingActivityBackButton);
+	/**
+	 * Find Controls
+	 */
+	private void findControls ()
+	{
+		prefs = PreferenceManager.getDefaultSharedPreferences (SettingActivity.this);
 
-    }
+		ipEditText = (EditText) findViewById (R.id.settingActivityServerIPEditText);
+		portEditText = (EditText) findViewById (R.id.settingActivityServerPortEditText);
+		saveButton = (Button) findViewById (R.id.settingActivitySaveButton);
+		backButton = (Button) findViewById (R.id.settingActivityBackButton);
+	}
 
+	/**
+	 * Load data
+	 */
+	private void loadData ()
+	{
+		if (prefs != null)
+		{
+			if (null != ipEditText)
+				ipEditText.setText (prefs.getString ("ip", ""));
+			if (null != portEditText)
+				portEditText.setText (prefs.getString ("port", ""));
+		}
+	}
+// </editor-fold>
 }

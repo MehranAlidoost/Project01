@@ -12,5 +12,5 @@
     <string name="back">بازگشت</string>
     <string name="fillAllFields">لطفا تمام فیلدها را پر کنید</string>
     <string name="ipAndPortSaved">آی پی و پورت ذخیره شد</string>
-
+    <string name="ipAndPortNotSaved">امکان ذخیره تنظیمات وجود ندارد</string>
 </resources>
