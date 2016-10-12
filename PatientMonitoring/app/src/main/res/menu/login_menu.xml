@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    >
+    <item
+        android:id="@+id/menuSettings"
+        android:icon="@mipmap/ic_setting"
+        android:title="@string/str_settings"
+        app:showAsAction="always"></item>
+    <item
+        android:id="@+id/menuAbout"
+        android:title="@string/str_about"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/menuExit"
+        android:title="@string/str_exit"
+        app:showAsAction="ifRoom"></item>
 </menu>

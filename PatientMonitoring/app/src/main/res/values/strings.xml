@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">سامانه نظارتی بیماران</string>
+
+
+    <string name="str_about_text1">
+        دکتر کجباف زاده\n
+        علیرضا عباسپور
+    </string>
+    <string name="str_username">نام کاربری</string>
+    <string name="str_password">گذرواژه</string>
+    <string name="str_confirm">تایید</string>
+    <string name="str_exit">خروج</string>
+    <string name="str_version">نگارش ۱</string>
+    <string name="str_about">درباره برنامه</string>
+    <string name="str_settings">تنظیمات</string>
+    <string name="str_patients_status">وضعیت بیماران</string>
+    <string name="str_cur_password">گذرواژه جاری</string>
+    <string name="str_new_pass_repeat">تکرار گذرواژه جدید</string>
+    <string name="str_new_pass">گذرواژه جدید</string>
+    <string name="str_change_password">تغییر گذرواژه</string>
+    <string name="str_change_password_successfully">گذرواژه با موفقیت تغییر یافت</string>
+    <string name="str_server_ip">آدرس سرور</string>
+    <string name="str_server_port">پورت اتصال</string>
+    <string name="str_save">ذخیره</string>
+    <string name="str_login_setting_change_successfully">تنظیمات با موفقیت اعمال شد</string>
+
+
+    <string name="err_empty_username">نام کاربری را وارد نمایید</string>
+    <string name="err_empty_password">گذرواژه را وارد نمایید</string>
+    <string name="err_auth_failed">اطلاعات وارد شده نامعتبر می باشد</string>
+    <string name="err_new_pass_empty">گذرواژه جدید را وارد نمایید</string>
+    <string name="err_cur_pass_empty">گذرواژه جاری را وارد نمایید</string>
+    <string name="err_new_pass_repeat_not_valid">گذرواژه جدید با تکرار آن یکسان نیست</string>
+    <string name="err_server_host_empty">آدرس سرور را وارد نمایید</string>
+
+
+    <string name="key_setting_login_data">Login_Data</string>
+    <string name="key_setting_ip">ip</string>
+    <string name="key_setting_port">port</string>
+</resources>
