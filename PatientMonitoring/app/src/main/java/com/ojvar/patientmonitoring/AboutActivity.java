@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 public class AboutActivity extends AppCompatActivity
 {
+	// <editor-fold defaultstate="" desc="Methods">
+
 	/**
 	 * Create Activity
 	 *
@@ -16,4 +18,5 @@ public class AboutActivity extends AppCompatActivity
 		super.onCreate (savedInstanceState);
 		setContentView (R.layout.activity_about);
 	}
+	// </editor-fold>
 }

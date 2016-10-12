@@ -3,18 +3,18 @@ package com.ojvar.patientmonitoring.Models;
 /**
  * Login Setting Data Model
  */
-public class LoginSettingData
+public class ConnectionData
 {
 	// <editor-fold defaultstate="" desc="Variables">
-	private String ip;
+	private String host;
 	private int    port;
 	// </editor-fold>
 
 	// <editor-fold defaultstate="" desc="Methods">
-	public LoginSettingData (String ip, int port)
+	public ConnectionData (String host, int port)
 	{
-		this.ip = ip;
-		this.port = port;
+		setHost (host);
+		setPort (port);
 	}
 
 	/**
@@ -22,19 +22,19 @@ public class LoginSettingData
 	 *
 	 * @return
 	 */
-	public String getIp ()
+	public String getHost ()
 	{
-		return ip;
+		return host;
 	}
 
 	/**
 	 * Set IP
 	 *
-	 * @param ip
+	 * @param host
 	 */
-	public void setIp (String ip)
+	public void setHost (String host)
 	{
-		this.ip = ip;
+		this.host = host;
 	}
 
 	/**

@@ -13,11 +13,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/iconImageView"
-        android:gravity="center"
+        android:gravity="center_vertical|right"
         android:paddingRight="10dp"
         android:text="TITLE"
-        android:textSize="18sp"/>
+        android:layout_toLeftOf="@+id/iconImageView"
+        android:layout_toStartOf="@+id/iconImageView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        />
 
     <ImageView
         android:id="@+id/iconImageView"

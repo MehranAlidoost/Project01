@@ -2,6 +2,7 @@ package com.ojvar.patientmonitoring;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ojvar.patientmonitoring.Helper.GlobalData;
-import com.ojvar.patientmonitoring.Models.LoginSettingData;
+import com.ojvar.patientmonitoring.Helper.TcpClient;
+import com.ojvar.patientmonitoring.Interfaces.IClientEvent;
+import com.ojvar.patientmonitoring.Models.ConnectionData;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -25,9 +28,9 @@ public class LoginActivity extends AppCompatActivity
 	Button   loginButton;
 	Button   exitButton;
 
-
-	LoginSettingData loginData;
-	Toast            lastToast;
+	ConnectionData loginData;
+	Toast          lastToast;
+	Handler        handler;
 	// </editor-fold>
 
 	// <editor-fold defaultstate="" desc="Methods">
@@ -101,7 +104,10 @@ public class LoginActivity extends AppCompatActivity
 	protected void onActivityResult (int requestCode, int resultCode, Intent data)
 	{
 		if ((requestCode == C_SETTING_REQ_CODE) && (resultCode == GlobalData.C_RES_OK))
+		{
+			GlobalData.disconnect (null);
 			GlobalData.loadLoginSetting (LoginActivity.this, loginData);
+		}
 	}
 
 	/**
@@ -157,7 +163,8 @@ public class LoginActivity extends AppCompatActivity
 	 */
 	private void prepare ()
 	{
-		loginData = new LoginSettingData ("", 0);
+		handler = new Handler ();
+		loginData = new ConnectionData ("", 0);
 		GlobalData.loadLoginSetting (LoginActivity.this, loginData);
 	}
 
@@ -170,7 +177,6 @@ public class LoginActivity extends AppCompatActivity
 		startActivityForResult (intent, C_SETTING_REQ_CODE);
 	}
 
-
 	/**
 	 * Show About
 	 */
@@ -180,19 +186,24 @@ public class LoginActivity extends AppCompatActivity
 		startActivity (intent);
 	}
 
+
 	/**
 	 * Check Login
 	 */
 	private void checkLogin ()
 	{
-		String err      = "";
-		String username = "";
-		String password = "";
+		String       err = "";
+		final String username;
+		final String password;
 
 		if (null != usernameEditText)
 			username = usernameEditText.getText ().toString ();
+		else
+			username = "";
 		if (null != passwordEditText)
 			password = passwordEditText.getText ().toString ();
+		else
+			password = "";
 
 		// <editor-fold defaultstate="" desc="Validate">
 		if (username.length () == 0)
@@ -212,13 +223,105 @@ public class LoginActivity extends AppCompatActivity
 		}
 		else
 		{
-			// <editor-fold defaultstate="" desc="Check User data">
+			// <editor-fold defaultstate="" desc="Try to connect to host">
+			ConnectionData data = new ConnectionData ("", 0);
+			GlobalData.loadLoginSetting (LoginActivity.this, data);
 
-			// If user data is valid
-			showMainActitiy ();
+			// <editor-fold defaultstate="" desc="Check User data">
+			if (null != lastToast)
+				lastToast.cancel ();
+
+			if (GlobalData.getClient () == null)
+				GlobalData.connect (data, new IClientEvent ()
+				{
+					@Override
+					public void onReceiveData (TcpClient sender, byte[] data, int size)
+					{
+					}
+
+					@Override
+					public void onConnect (TcpClient sender)
+					{
+						handler.post (new Runnable ()
+						{
+							@Override
+							public void run ()
+							{
+								if (null != lastToast)
+									lastToast.cancel ();
+
+								lastToast = Toast.makeText (LoginActivity.this, getResources ().getString (R.string.str_connecting_to_server), Toast.LENGTH_SHORT);
+								lastToast.show ();
+							}
+						});
+
+						// Setup receiver
+						GlobalData.getClient ().setClientEvent (onClientReceiveData);
+
+						// Send login data
+						sendLoginData (username, password);
+					}
+
+					@Override
+					public void onDisconnect (TcpClient sender)
+					{
+					}
+				});
+			else
+				// Send login data
+				sendLoginData (username, password);
+			// </editor-fold>
 
 			// </editor-fold>
 		}
+	}
+
+	/**
+	 * Client Receive data
+	 */
+	IClientEvent onClientReceiveData = new IClientEvent ()
+	{
+		@Override
+		public void onReceiveData (TcpClient sender, final byte[] data, int size)
+		{
+			handler.post (new Runnable ()
+			{
+				@Override
+				public void run ()
+				{
+					String recData = new String (data).replace ("\n", "");
+
+					if (recData.toLowerCase ().equals (getResources ().getString (R.string.cmd_server_ok)))
+						showMainActitiy ();
+					else
+					{
+						if (null != lastToast)
+							lastToast.cancel ();
+
+						lastToast = Toast.makeText (LoginActivity.this, getResources ().getString (R.string.err_login_failed), Toast.LENGTH_SHORT);
+						lastToast.show ();
+					}
+				}
+			});
+		}
+
+		@Override
+		public void onConnect (TcpClient sender)
+		{
+		}
+
+		@Override
+		public void onDisconnect (TcpClient sender)
+		{
+		}
+	};
+
+	/**
+	 * Send Login data
+	 */
+	private void sendLoginData (final String username, final String password)
+	{
+		GlobalData.getClient ().write (String.format (getResources ().getString (R.string.cmd_login_command), username, password));
 	}
 
 	/**
@@ -235,8 +338,8 @@ public class LoginActivity extends AppCompatActivity
 			password = passwordEditText.getText ().toString ();
 
 		// Save user data
-		GlobalData.username = username;
-		GlobalData.password = password;
+		GlobalData.setUsername (username);
+		GlobalData.setPassword (password);
 
 		// Show main activity
 		Intent intent = new Intent (LoginActivity.this, MainActivity.class);

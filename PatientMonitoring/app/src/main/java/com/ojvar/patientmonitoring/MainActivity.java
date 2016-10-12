@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ojvar.patientmonitoring.Adapters.MainMenuAdapter;
+import com.ojvar.patientmonitoring.Helper.GlobalData;
 import com.ojvar.patientmonitoring.Models.MainMenuItem;
 
 public class MainActivity extends AppCompatActivity
@@ -27,14 +28,23 @@ public class MainActivity extends AppCompatActivity
 	}
 
 	/**
+	 * On Resume
+	 */
+	@Override
+	protected void onResume ()
+	{
+		super.onResume ();
+
+		prepareList ();
+	}
+
+	/**
 	 * Initialize
 	 */
 	private void init ()
 	{
 		findControls ();
 		bindEvents ();
-
-		prepareList ();
 	}
 
 	/**
@@ -98,6 +108,9 @@ public class MainActivity extends AppCompatActivity
 			MainMenuAdapter mainMenuAdapter = new MainMenuAdapter (MainActivity.this, items);
 			mainListView.setAdapter (mainMenuAdapter);
 		}
+
+		// Clear client event
+		GlobalData.getClient ().setClientEvent (null);
 	}
 
 	/**

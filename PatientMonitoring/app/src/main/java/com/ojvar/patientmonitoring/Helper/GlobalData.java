@@ -3,7 +3,8 @@ package com.ojvar.patientmonitoring.Helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.ojvar.patientmonitoring.Models.LoginSettingData;
+import com.ojvar.patientmonitoring.Interfaces.IClientEvent;
+import com.ojvar.patientmonitoring.Models.ConnectionData;
 import com.ojvar.patientmonitoring.R;
 
 /**
@@ -18,25 +19,114 @@ public class GlobalData
 	// </editor-fold>
 
 	// <editor-fold defaultstate="" desc="Variables">
-	public static String username = "";
-	public static String password = "";
+	private static String    username;
+	private static String    password;
+	private static TcpClient client;
+	// </editor-fold>
+
+	// <editor-fold defaultstate="" desc="Properties">
+
+	/**
+	 * Get Username
+	 *
+	 * @return
+	 */
+	public static String getUsername ()
+	{
+		return username;
+	}
+
+	/**
+	 * Set Username
+	 *
+	 * @param username
+	 */
+	public static void setUsername (String username)
+	{
+		GlobalData.username = username;
+	}
+
+	/**
+	 * Get Password
+	 *
+	 * @return
+	 */
+	public static String getPassword ()
+	{
+		return password;
+	}
+
+	/**
+	 * Set Password
+	 *
+	 * @param password
+	 */
+	public static void setPassword (String password)
+	{
+		GlobalData.password = password;
+	}
+
+	/**
+	 * Get Client
+	 *
+	 * @return
+	 */
+	public static TcpClient getClient ()
+	{
+		return client;
+	}
+
+	/**
+	 * Set Client
+	 *
+	 * @param client
+	 */
+	public static void setClient (TcpClient client)
+	{
+		GlobalData.client = client;
+	}
 	// </editor-fold>
 
 	// <editor-fold defaultstate="" desc="Methods">
+
+	/**
+	 * Connect
+	 */
+	public static void connect (ConnectionData data, IClientEvent event)
+	{
+		if ((client == null) || client.isClosed ())
+		{
+			if (client == null)
+				client = new TcpClient ();
+			client.connect (data, event);
+		}
+	}
+
+	/**
+	 * Disconnect
+	 */
+	public static void disconnect (IClientEvent event)
+	{
+		if ((client == null) || client.isConnected ())
+		{
+			client.disconnect (event);
+			client = null;
+		}
+	}
 
 	/**
 	 * Save Setting
 	 *
 	 * @param context
 	 */
-	public static void saveLoginSetting (Context context, LoginSettingData data)
+	public static void saveLoginSetting (Context context, ConnectionData data)
 	{
 		if ((null != context) && (null != data))
 		{
 			SharedPreferences        sharedPreferences = context.getSharedPreferences (context.getResources ().getString (R.string.key_setting_login_data), Context.MODE_PRIVATE);
 			SharedPreferences.Editor editor            = sharedPreferences.edit ();
 
-			editor.putString (context.getResources ().getString (R.string.key_setting_ip), data.getIp ());
+			editor.putString (context.getResources ().getString (R.string.key_setting_ip), data.getHost ());
 			editor.putInt (context.getResources ().getString (R.string.key_setting_port), data.getPort ());
 			editor.commit ();
 		}
@@ -47,15 +137,16 @@ public class GlobalData
 	 *
 	 * @param context
 	 */
-	public static void loadLoginSetting (Context context, LoginSettingData data)
+	public static void loadLoginSetting (Context context, ConnectionData data)
 	{
 		if ((null != context) && (null != data))
 		{
 			SharedPreferences sharedPreferences = context.getSharedPreferences (context.getResources ().getString (R.string.key_setting_login_data), Context.MODE_PRIVATE);
 
-			data.setIp (sharedPreferences.getString (context.getResources ().getString (R.string.key_setting_ip), "").toString ());
+			data.setHost (sharedPreferences.getString (context.getResources ().getString (R.string.key_setting_ip), "").toString ());
 			data.setPort (sharedPreferences.getInt (context.getResources ().getString (R.string.key_setting_port), 0));
 		}
 	}
+
 	// </editor-fold>
 }

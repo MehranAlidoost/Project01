@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ojvar.patientmonitoring.Helper.GlobalData;
-import com.ojvar.patientmonitoring.Models.LoginSettingData;
+import com.ojvar.patientmonitoring.Models.ConnectionData;
 
 public class LoginSettingActivity extends AppCompatActivity
 {
@@ -118,7 +118,7 @@ public class LoginSettingActivity extends AppCompatActivity
 		}
 		else
 		{
-			LoginSettingData data = new LoginSettingData (ip, port);
+			ConnectionData data = new ConnectionData (ip, port);
 			GlobalData.saveLoginSetting (LoginSettingActivity.this, data);
 
 			lastToast = Toast.makeText (LoginSettingActivity.this, getString (R.string.str_login_setting_change_successfully), Toast.LENGTH_LONG);
@@ -135,11 +135,11 @@ public class LoginSettingActivity extends AppCompatActivity
 	 */
 	private void loadLoginData ()
 	{
-		LoginSettingData data = new LoginSettingData ("", 0);
+		ConnectionData data = new ConnectionData ("", 0);
 		GlobalData.loadLoginSetting (LoginSettingActivity.this, data);
 
 		if (null != serverIpEditText)
-			serverIpEditText.setText (data.getIp ());
+			serverIpEditText.setText (data.getHost ());
 		if (null != serverPortEditText)
 			serverPortEditText.setText (String.valueOf (data.getPort ()));
 	}
