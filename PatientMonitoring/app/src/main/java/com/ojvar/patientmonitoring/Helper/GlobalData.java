@@ -2,6 +2,9 @@ package com.ojvar.patientmonitoring.Helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.ojvar.patientmonitoring.Interfaces.IClientEvent;
 import com.ojvar.patientmonitoring.Models.ConnectionData;
@@ -26,6 +29,21 @@ public class GlobalData
 
 	// <editor-fold defaultstate="" desc="Properties">
 
+	/**
+	 * Show Animation
+	 */
+	public static void applyAnimation (Context context, View view, int anim)
+	{
+		Animation a = AnimationUtils.loadAnimation (context, anim);
+
+		if ((a != null) && (null != view))
+		{
+			a.reset ();
+
+			view.clearAnimation ();
+			view.startAnimation (a);
+		}
+	}
 	/**
 	 * Get Username
 	 *
@@ -107,11 +125,9 @@ public class GlobalData
 	 */
 	public static void disconnect (IClientEvent event)
 	{
-		if ((client == null) || client.isConnected ())
-		{
+		if ((client != null) && client.isConnected ())
 			client.disconnect (event);
-			client = null;
-		}
+		client = null;
 	}
 
 	/**

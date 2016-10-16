@@ -1,14 +1,17 @@
 package com.ojvar.patientmonitoring;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ojvar.patientmonitoring.Helper.GlobalData;
@@ -23,10 +26,11 @@ public class LoginActivity extends AppCompatActivity
 	// </editor-fold>
 
 	// <editor-fold defaultstate="" desc="Variables">
-	EditText usernameEditText;
-	EditText passwordEditText;
-	Button   loginButton;
-	Button   exitButton;
+	EditText  usernameEditText;
+	EditText  passwordEditText;
+	Button    loginButton;
+	Button    exitButton;
+	ImageView iconImageView;
 
 	ConnectionData loginData;
 	Toast          lastToast;
@@ -119,6 +123,7 @@ public class LoginActivity extends AppCompatActivity
 		bindEvents ();
 
 		prepare ();
+		showAnimation ();
 	}
 
 	/**
@@ -130,6 +135,7 @@ public class LoginActivity extends AppCompatActivity
 		exitButton = (Button) findViewById (R.id.exitButton);
 		usernameEditText = (EditText) findViewById (R.id.usernameEditText);
 		passwordEditText = (EditText) findViewById (R.id.passwordEditText);
+		iconImageView = (ImageView) findViewById (R.id.iconImageView);
 	}
 
 	/**
@@ -143,7 +149,8 @@ public class LoginActivity extends AppCompatActivity
 				@Override
 				public void onClick (View v)
 				{
-					checkLogin ();
+					showMainActitiy ();     // Temporary -- Just for test , when release uncomment below line and delete this line
+					//checkLogin ();
 				}
 			});
 
@@ -156,6 +163,17 @@ public class LoginActivity extends AppCompatActivity
 					close ();
 				}
 			});
+	}
+
+	/**
+	 * Show Animation
+	 */
+	private void showAnimation ()
+	{
+		View v = findViewById (R.id.activity_login);
+
+		if (null != v)
+			GlobalData.applyAnimation (LoginActivity.this, v, R.anim.fade_out);
 	}
 
 	/**

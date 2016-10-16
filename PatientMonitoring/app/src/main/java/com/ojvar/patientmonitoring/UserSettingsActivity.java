@@ -97,62 +97,63 @@ public class UserSettingsActivity extends AppCompatActivity
 	{
 		handler = new Handler ();
 
-		GlobalData.getClient ().setClientEvent (new IClientEvent ()
-		{
-			@Override
-			public void onReceiveData (TcpClient sender, byte[] data, int size)
+		if (null != GlobalData.getClient ())
+			GlobalData.getClient ().setClientEvent (new IClientEvent ()
 			{
-				String cmd = new String (data).trim ().replace ("\n", "");
-
-				// Parse command
-				String[] cmdPart = cmd.split ("\r");
-
-				if (cmdPart.length > 0)
+				@Override
+				public void onReceiveData (TcpClient sender, byte[] data, int size)
 				{
-					String cmdType = cmdPart[0].toLowerCase ().trim ();
+					String cmd = new String (data).trim ().replace ("\n", "");
 
-					if (null != lastToast)
-						lastToast.cancel ();
+					// Parse command
+					String[] cmdPart = cmd.split ("\r");
 
-					if (cmdType.equals (getResources ().getString (R.string.cmd_server_ok)))
+					if (cmdPart.length > 0)
 					{
-						handler.post (new Runnable ()
-						{
-							@Override
-							public void run ()
-							{
-								lastToast = Toast.makeText (UserSettingsActivity.this,  getResources ().getString (R.string.str_passwd_successfully_changed), Toast.LENGTH_LONG);
-								lastToast.show ();
+						String cmdType = cmdPart[0].toLowerCase ().trim ();
 
-								Close ();
-							}
-						});
-					}
-					else if (cmdType.equals (getResources ().getString (R.string.cmd_server_failed)))
-					{
-						handler.post (new Runnable ()
+						if (null != lastToast)
+							lastToast.cancel ();
+
+						if (cmdType.equals (getResources ().getString (R.string.cmd_server_ok)))
 						{
-							@Override
-							public void run ()
+							handler.post (new Runnable ()
 							{
-								lastToast = Toast.makeText (UserSettingsActivity.this,  getResources ().getString (R.string.str_passwd_successfully_failed), Toast.LENGTH_LONG);
-								lastToast.show ();
-							}
-						});
+								@Override
+								public void run ()
+								{
+									lastToast = Toast.makeText (UserSettingsActivity.this, getResources ().getString (R.string.str_passwd_successfully_changed), Toast.LENGTH_LONG);
+									lastToast.show ();
+
+									Close ();
+								}
+							});
+						}
+						else if (cmdType.equals (getResources ().getString (R.string.cmd_server_failed)))
+						{
+							handler.post (new Runnable ()
+							{
+								@Override
+								public void run ()
+								{
+									lastToast = Toast.makeText (UserSettingsActivity.this, getResources ().getString (R.string.str_passwd_successfully_failed), Toast.LENGTH_LONG);
+									lastToast.show ();
+								}
+							});
+						}
 					}
 				}
-			}
 
-			@Override
-			public void onConnect (TcpClient sender)
-			{
-			}
+				@Override
+				public void onConnect (TcpClient sender)
+				{
+				}
 
-			@Override
-			public void onDisconnect (TcpClient sender)
-			{
-			}
-		});
+				@Override
+				public void onDisconnect (TcpClient sender)
+				{
+				}
+			});
 	}
 
 	/**
@@ -194,10 +195,13 @@ public class UserSettingsActivity extends AppCompatActivity
 		}
 		else
 		{
-			GlobalData.getClient ().write (String.format (getResources ().getString (R.string.cmd_passwd), GlobalData.getUsername (), curPass, newPass1));
+			if (null != GlobalData.getClient ())
+			{
+				GlobalData.getClient ().write (String.format (getResources ().getString (R.string.cmd_passwd), GlobalData.getUsername (), curPass, newPass1));
 
-			lastToast = Toast.makeText (UserSettingsActivity.this, getResources ().getString (R.string.str_send_request_loading), Toast.LENGTH_LONG);
-			lastToast.show ();
+				lastToast = Toast.makeText (UserSettingsActivity.this, getResources ().getString (R.string.str_send_request_loading), Toast.LENGTH_LONG);
+				lastToast.show ();
+			}
 		}
 		// </editor-fold>
 	}

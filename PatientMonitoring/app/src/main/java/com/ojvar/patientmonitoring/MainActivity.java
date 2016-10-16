@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity
 		}
 
 		// Clear client event
-		GlobalData.getClient ().setClientEvent (null);
+		if (null != GlobalData.getClient ())
+			GlobalData.getClient ().setClientEvent (null);
 	}
 
 	/**

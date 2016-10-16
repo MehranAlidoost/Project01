@@ -10,13 +10,15 @@ public class MainMenuItem
 	private int    icon;
 	// </editor-fold>
 
-	// <editor-fold defaultstate="" desc="Properties">
 	// <editor-fold defaultstate="" desc="Methods">
 	public MainMenuItem (String text, int icon)
 	{
 		this.text = text;
 		this.icon = icon;
 	}
+	// </editor-fold>
+
+	// <editor-fold defaultstate="" desc="Properties">
 
 	/**
 	 * Get Text
@@ -47,7 +49,6 @@ public class MainMenuItem
 	{
 		return icon;
 	}
-	// </editor-fold>
 
 	/**
 	 * Set Icon
