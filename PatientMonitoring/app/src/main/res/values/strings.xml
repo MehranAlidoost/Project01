@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">سامانه نظارتی بیماران</string>
+    <string name="str_username">نام کاربری</string>
+    <string name="str_password">گذرواژه</string>
+    <string name="str_confirm">تایید</string>
+    <string name="str_exit">خروج</string>
+    <string name="str_version">نگارش ۱</string>
+    <string name="str_about">درباره برنامه</string>
+    <string name="str_settings">تنظیمات</string>
+
+
+    <string name="err_empty_username">نام کاربری را وارد نمایید</string>
+    <string name="err_empty_password">کلمه عبور را وارد نمایید</string>
+    <string name="err_auth_failed">اطلاعات وارد شده نامعتبر می باشد</string>
+</resources>
