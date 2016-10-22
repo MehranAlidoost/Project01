@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ojvar.patientmonitoring">
+<<<<<<< HEAD:PatientMonitoring/app/src/main/AndroidManifest.xml
+=======
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f:PatientMonitoring/app/src/main/AndroidManifest.xml
 
     <application
         android:allowBackup="true"
@@ -11,16 +16,36 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
+<<<<<<< HEAD:PatientMonitoring/app/src/main/AndroidManifest.xml
             android:name=".MainActivity">
         </activity>
         <activity
             android:name=".AboutActivity"
             android:theme="@style/Theme.AppCompat.Dialog.Alert">
+=======
+            android:name=".AboutActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog">
+        </activity>
+        <activity android:name=".MainActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".PatientStatusActivity">
+        </activity>
+        <activity
+            android:name=".UserSettingsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog">
+        </activity>
+        <activity
+            android:name=".LoginSettingActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog">
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f:PatientMonitoring/app/src/main/AndroidManifest.xml
         </activity>
     </application>
 
