@@ -1,5 +1,7 @@
 package com.ojvar.patientmonitoring.Helper;
 
+<<<<<<< HEAD
+=======
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
@@ -10,12 +12,17 @@ import com.ojvar.patientmonitoring.Interfaces.IClientEvent;
 import com.ojvar.patientmonitoring.Models.ConnectionData;
 import com.ojvar.patientmonitoring.R;
 
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 /**
  * Created by silvernight on 10/11/16.
  */
 
 public class GlobalData
 {
+<<<<<<< HEAD
+	public static String username = "";
+	public static String password = "";
+=======
 	// <editor-fold defaultstate="" desc="Constants">
 	public static final int C_RES_OK     = 0;
 	public static final int C_RES_CANCEL = 1;
@@ -165,4 +172,5 @@ public class GlobalData
 	}
 
 	// </editor-fold>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 }

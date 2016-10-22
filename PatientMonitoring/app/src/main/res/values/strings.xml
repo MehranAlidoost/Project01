@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">سامانه نظارتی بیماران</string>
+<<<<<<< HEAD
+=======
 
 
     <string name="str_about_text1">
         دکتر کجباف زاده\n
         علیرضا عباسپور
     </string>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
     <string name="str_username">نام کاربری</string>
     <string name="str_password">گذرواژه</string>
     <string name="str_confirm">تایید</string>
@@ -13,6 +16,13 @@
     <string name="str_version">نگارش ۱</string>
     <string name="str_about">درباره برنامه</string>
     <string name="str_settings">تنظیمات</string>
+<<<<<<< HEAD
+
+
+    <string name="err_empty_username">نام کاربری را وارد نمایید</string>
+    <string name="err_empty_password">کلمه عبور را وارد نمایید</string>
+    <string name="err_auth_failed">اطلاعات وارد شده نامعتبر می باشد</string>
+=======
     <string name="str_patients_status">وضعیت بیماران</string>
     <string name="str_cur_password">گذرواژه جاری</string>
     <string name="str_new_pass_repeat">تکرار گذرواژه جدید</string>
@@ -45,4 +55,5 @@
     <string formatted="false" name="cmd_server_failed">failed</string>
     <string formatted="false" name="cmd_login_command">LOGIN\r%s\r%s</string>
     <string formatted="false" name="cmd_passwd">PASSWD\r%s\r%s\r%s</string>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 </resources>

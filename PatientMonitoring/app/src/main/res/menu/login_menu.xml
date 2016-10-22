@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/menuSettings"
+        android:icon="@mipmap/ic_settings"
+        android:showAsAction="always"
+        android:title="@string/str_settings"></item>
+    <item
+        android:id="@+id/menuAbout"
+        android:showAsAction="ifRoom"
+        android:title="@string/str_about"></item>
+    <item
+        android:id="@+id/menuExit"
+        android:showAsAction="ifRoom"
+        android:title="@string/str_exit"></item>
+=======
     xmlns:app="http://schemas.android.com/tools"
     >
     <item
@@ -16,4 +33,5 @@
         android:id="@+id/menuExit"
         android:title="@string/str_exit"
         app:showAsAction="ifRoom"></item>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 </menu>

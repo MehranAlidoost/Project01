@@ -47,42 +47,77 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:text="@string/str_confirm"
+        android:layout_alignBaseline="@+id/exitButton"
+        android:layout_alignBottom="@+id/exitButton"
+        android:layout_toRightOf="@+id/exitButton"
+        android:layout_toEndOf="@+id/exitButton"/>
+=======
         android:layout_alignBaseline="@+id/exitButton"
         android:layout_alignBottom="@+id/exitButton"
         android:layout_toEndOf="@+id/exitButton"
         android:layout_toRightOf="@+id/exitButton"
         android:text="@string/str_confirm"/>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 
     <Button
         android:id="@+id/exitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:layout_marginTop="14dp"
+        android:text="@string/str_exit"
+        android:layout_below="@+id/passwordEditText"
+        android:layout_alignLeft="@+id/passwordEditText"
+        android:layout_alignStart="@+id/passwordEditText"/>
+
+=======
         android:layout_alignLeft="@+id/passwordEditText"
         android:layout_alignStart="@+id/passwordEditText"
         android:layout_below="@+id/passwordEditText"
         android:layout_marginTop="14dp"
         android:text="@string/str_exit"/>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textSize="18sp"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+=======
         android:layout_above="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:gravity="center"
         android:text="@string/app_name"
         android:textSize="18sp"/>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:gravity="center"
+        android:text="@string/str_version"
+        android:textSize="12sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+=======
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:gravity="center"
         android:text="@string/str_version"
         android:textSize="12sp"/>
+>>>>>>> 197f11fcead1a97864ebc9fd0a075e35c7c0a74f
 </RelativeLayout>
